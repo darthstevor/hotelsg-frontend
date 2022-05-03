@@ -1,12 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import "antd/dist/antd.css";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// 1. Import from react-redux and redux
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import rootReducer from './reducers';
+
+// 2. create user reducer function
+// { type: 'LOGGED_IN_USER', payload: {name: 'Ryan', role: 'Seller} }
+// 3. Combine multiple reducers
+// 4. Create redux store
+const store = createStore(rootReducer, composeWithDevTools());
+
+// 5. provide redux store to the entire app
+
 ReactDOM.render(
   <React.StrictMode>
+  <Provider store={store}>
     <App />
+  </Provider>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );
